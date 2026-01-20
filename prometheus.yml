@@ -1,8 +1,8 @@
 global:
-  scrape_interval: 5s
+  scrape_interval: 5s #scrape metrics from targets every 5 seconds
 
 scrape_configs:
 - job_name: "prometheus"
   static_configs:
   - targets:
-    - localhost:9090
+    - localhost:9090  #scrape Prometheus on http://localhost:9090/metrics
