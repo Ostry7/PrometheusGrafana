@@ -1,4 +1,4 @@
-# Task 1: Basic Prometheus + Grafana Setup with Docker Compose
+# Task 1: Basic Prometheus + Grafana Setup with Docker Compose []
 
 ## Goal
 Set up a simple monitoring stack using **Prometheus** and **Grafana** running in Docker containers.  
