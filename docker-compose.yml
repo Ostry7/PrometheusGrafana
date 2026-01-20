@@ -1,5 +1,6 @@
 services:
   prometheus:
+    container_name: prometheus_ct
     image: prom/prometheus:main
     volumes:
       - prometheus_data:/prometheus
@@ -7,6 +8,17 @@ services:
     ports:
       - 9090:9090
     restart: unless-stopped
+    
+  grafana:
+    container_name: grafana_ct
+    image: grafana/grafana:main
+    ports:
+      - 3000:3000
+    volumes:
+      - grafana_data:/var/lib/grafana
+    restart: unless-stopped
+
 
 volumes:
   prometheus_data:
+  grafana_data:
