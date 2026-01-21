@@ -6,3 +6,7 @@ scrape_configs:
   static_configs:
   - targets:
     - localhost:9090  #scrape Prometheus on http://localhost:9090/metrics
+- job_name: "HLDEBVM01"
+  static_configs:
+  - targets:
+    - 192.168.68.240:9100
