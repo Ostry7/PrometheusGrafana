@@ -66,3 +66,18 @@ docker compose up
 -`http://localhost:3000` -> **Grafana**
 
 ![alt text](image-1.png)
+
+
+# Task 2: Adding Node Exporter – System-Level Monitoring []
+
+## Goal
+Extend the basic Prometheus + Grafana monitoring stack by adding **Node Exporter** to collect hardware and OS-level metrics (CPU, memory, disk, network, load average, etc.).  
+The purpose of this project is to:
+- Learn how to deploy and run Node Exporter (binary or Docker)
+- Configure Prometheus to scrape metrics from a new target
+- Use pre-built Grafana dashboards for quick visualization
+- Simulate system load and observe real-time metric changes
+- Understand the concept of exporters in the Prometheus ecosystem
+
+### Solution:
+
