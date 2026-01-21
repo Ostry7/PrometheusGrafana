@@ -68,7 +68,7 @@ docker compose up
 ![alt text](image-1.png)
 
 
-# Task 2: Adding Node Exporter – System-Level Monitoring []
+# Task 2: Adding Node Exporter – System-Level Monitoring [v]
 
 ## Goal
 Extend the basic Prometheus + Grafana monitoring stack by adding **Node Exporter** to collect hardware and OS-level metrics (CPU, memory, disk, network, load average, etc.).  
@@ -81,3 +81,52 @@ The purpose of this project is to:
 
 ### Solution:
 
+1. Install node exporter on `HLDEBVM01`:
+
+```bash
+wget https://github.com/prometheus/node_exporter/releases/download/v1.8.2/node_exporter-1.8.2.linux-amd64.tar.gz
+tar xvfz node_exporter-*.tar.gz
+sudo mv node_exporter-*/node_exporter /usr/local/bin/
+```
+
+2. Create service on `HLDEBVM01`:
+```bash
+[Unit]
+Description=Prometheus Node Exporter
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=node_exporter
+Type=simple
+ExecStart=/usr/local/bin/node_exporter \
+  --web.listen-address=:9100
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+```
+
+3. Start the service:
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable node-exporter  
+sudo systemctl start node-exporter
+```
+
+4. Add scrape from new VM `prometheus.yml`:
+```yml
+- job_name: "HLDEBVM01"
+  static_configs:
+  - targets:
+    - 192.168.68.240:9100
+```
+
+5. Check if the new vm is visible on Prometheus:
+
+![alt text](image-2.png)
+
+6. Create dashboard in Grafana and run some stress tests to check the metrics:
+
+![alt text](image-3.png)
