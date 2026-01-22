@@ -130,3 +130,14 @@ sudo systemctl start node-exporter
 6. Create dashboard in Grafana and run some stress tests to check the metrics:
 
 ![alt text](image-3.png)
+
+# Task 3: Configuring Alerts in Prometheus with Alertmanager []
+
+## Goal
+Set up a complete alerting system using **Prometheus** rules and **Alertmanager** to handle notifications.  
+The purpose of this project is to:
+- Learn how to define alerting rules in Prometheus (PromQL-based)
+- Deploy and configure Alertmanager to deduplicate, group, and route alerts
+- Integrate notifications with external services (e.g., email, Discord/Slack webhook)
+- Visualize active/firing alerts in Grafana
+- Simulate conditions to trigger alerts and verify the full notification flow
