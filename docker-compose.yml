@@ -1,4 +1,5 @@
 services:
+#prometheus
   prometheus:
     container_name: prometheus_ct
     image: prom/prometheus:main
@@ -10,7 +11,8 @@ services:
     restart: unless-stopped
     networks:
       - monitoring
-    
+
+#grafana    
   grafana:
     container_name: grafana_ct
     image: grafana/grafana:main
@@ -22,6 +24,7 @@ services:
     networks:
       - monitoring
 
+#alert manager
   alertmanager:
     container_name: alertmanager_ct
     image: prom/alertmanager:latest
