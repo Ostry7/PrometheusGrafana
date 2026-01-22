@@ -1,0 +1,27 @@
+global:
+  resolve_timeout: 5m
+  smtp_from: 'twoj.email@gmail.com'               # ← nadawca (widoczny w mailu)
+  smtp_smarthost: 'smtp.gmail.com:587'            # ← serwer Gmail
+  smtp_hello: 'localhost'                         # opcjonalnie
+  smtp_require_tls: true                          # zalecane
+
+route:
+  group_by: ['alertname', 'instance']
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 4h
+  receiver: 'email-me'
+
+receivers:
+  - name: 'email-me'
+    email_configs:
+      - to: 'tomail@gmail.com'                    # ← gdzie wysyłać powiadomienia
+        from: 'frommail@gmail.com'                # ← nadawca (musi być taki sam jak smtp_from)
+        smarthost: 'smtp.gmail.com:587'           # ← powtórzone tu (lub globalnie)
+        auth_username: 'frommail@gmail.com'
+        auth_password: 'XXXXXXXXXXXXX'            # ← TU WKLEJ APP PASSWORD (bez spacji!)
+        #auth_identity: 'frommail@gmail.com'      # opcjonalnie, ale czasem pomaga
+        require_tls: true
+        send_resolved: true                       # wysyłaj też info o rozwiązaniu problemu
+
+inhibit_rules: []                                 # opcjonalnie – możesz dodać później
