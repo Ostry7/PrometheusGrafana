@@ -1,0 +1,11 @@
+groups:
+- name: HLDEBVM01_alerts
+  rules:
+  - alert: NodeExporterDown
+    expr: up{job="HLDEBVM01"} == 0
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: "HLDEBVM01 down"
+      description: "HLDEBVM01 has been down for more than 1 minute."

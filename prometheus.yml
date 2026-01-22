@@ -10,3 +10,12 @@ scrape_configs:
   static_configs:
   - targets:
     - 192.168.68.240:9100
+
+#alertmanager
+rule_files:
+  - /etc/prometheus/alerts.yml
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+            - 'alertmanager:9093'
