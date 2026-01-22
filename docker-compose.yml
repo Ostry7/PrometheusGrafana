@@ -8,6 +8,8 @@ services:
     ports:
       - 9090:9090
     restart: unless-stopped
+    networks:
+      - monitoring
     
   grafana:
     container_name: grafana_ct
@@ -17,8 +19,27 @@ services:
     volumes:
       - grafana_data:/var/lib/grafana
     restart: unless-stopped
+    networks:
+      - monitoring
+
+  alertmanager:
+    container_name: alertmanager_ct
+    image: prom/alertmanager:latest
+    restart: unless-stopped
+    volumes:
+      - ./alertmanager.yml:/etc/alertmanager/alertmanager.yml
+    command:
+      - --config.file=/etc/alertmanager/alertmanager.yml
+    ports:
+      - 9093:9093
+    networks:
+      - monitoring
 
 
 volumes:
   prometheus_data:
   grafana_data:
+
+networks:
+  monitoring:
+    driver: bridge
